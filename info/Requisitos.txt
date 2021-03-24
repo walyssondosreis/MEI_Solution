@@ -1,7 +1,13 @@
+PostgreSQL 13
+Server: localhost:5432
+User: postgres
+Pass: 123
+DB_Name: meidb
 
+Pacotes Python:
 pip install image
 pip install psycopg2
 
-
+Usuário teste MEI:
 Usuário: 'mei'
 Senha: '123'

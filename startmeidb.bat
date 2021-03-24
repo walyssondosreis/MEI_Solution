@@ -1,1 +1,0 @@
-.\pgsql\App\PgSQL\bin\pg_ctl -D ".\pgsql\Data\data" start

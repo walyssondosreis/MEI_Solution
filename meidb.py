@@ -14,11 +14,11 @@ from tkinter import messagebox
 class db:
 
     def __init__(self):
-        try:
-            self.startDBService()
+        #try:
+            #self.startDBService()
             #pass
-        except:
-            print('Não foi possivel iniciar o serviço do banco de dados')
+        #except:
+            #print('Não foi possivel iniciar o serviço do banco de dados')
         try:
             self.connect()
         except:
@@ -27,7 +27,7 @@ class db:
 
     def __del__(self): # FUNÇÃO DESTRUTORA
         self.disconnect()
-        self.stopDBService()
+        #self.stopDBService()
         #print('destruiu!')
 
     # ===================================================================================================================
