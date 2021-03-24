@@ -1,0 +1,10 @@
+
+Criando documentações com Sphinx
+https://victortorres.net.br/2020/05/13/criando-documentacoes-com-sphinx
+
+Site para hospedagem de documentação gratuita
+https://readthedocs.org/
+
+Documentando um programa Python com docstrings e Pydoc
+https://cadernodelaboratorio.com.br/documentando-um-programa-python-com-docstrings-e-pydoc/
+

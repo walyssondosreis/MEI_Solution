@@ -424,4 +424,3 @@ App(window)
 window.protocol("WM_DELETE_WINDOW",closeApp)
 window.mainloop()
 
-
