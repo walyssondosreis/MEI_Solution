@@ -1,0 +1,84 @@
+CREATE TABLE CLIENTE(
+	"cod" SERIAL NOT NULL,
+	"nome" VARCHAR(50) NOT NULL,
+	"cpfcnpj" VARCHAR(18) NOT NULL,
+	"telefone" VARCHAR(14),
+	"logradouro" VARCHAR(200),
+	"cidade" VARCHAR(50),
+	"estado" VARCHAR(2),
+	"cep" VARCHAR(9),
+	PRIMARY KEY("cod"),
+	UNIQUE ("cpfcnpj")
+);
+CREATE TABLE FORNECEDOR(
+	"cod" SERIAL NOT NULL,
+	"nome" VARCHAR(50) NOT NULL,
+	"cnpj" VARCHAR(18) NOT NULL,
+	"telefone" VARCHAR(14),
+	"logradouro" VARCHAR(200),
+	"cidade" VARCHAR(50),
+	"estado" VARCHAR(2),
+	"cep" VARCHAR(9),
+	PRIMARY KEY("cod"),
+	UNIQUE ("cnpj")
+);
+CREATE TABLE PRODUTO(
+	"cod" SERIAL NOT NULL,
+	"nome" VARCHAR(200) NOT NULL,
+	"preco_venda" DECIMAL(11,2) DEFAULT 0.0,
+	"qtd_estoque" INT NOT NULL DEFAULT 0 CHECK("qtd_estoque">=0),
+	"descricao" VARCHAR(2000),
+	PRIMARY KEY("cod")
+	
+);
+CREATE TABLE COMPRA(
+	"cod" SERIAL NOT NULL,
+	"cod_fornecedor" INT NOT NULL,
+	"data" DATE NOT NULL,
+	PRIMARY KEY("cod"),
+	FOREIGN KEY("cod_fornecedor") REFERENCES "fornecedor"("cod")
+
+);
+CREATE TABLE PRODUTOS_COMPRA(
+	"cod_compra" INT NOT NULL,
+	"cod_produto" INT NOT NULL,
+	"preco_compra" DECIMAL(11,2) NOT NULL,
+	"quantidade" INT NOT NULL CHECK("quantidade">0),
+	PRIMARY KEY("cod_compra","cod_produto"),
+	FOREIGN KEY("cod_compra") REFERENCES "compra"("cod"),
+	FOREIGN KEY("cod_produto") REFERENCES "produto"("cod")
+
+);
+CREATE TABLE VENDA(
+	"cod" SERIAL NOT NULL,
+	"cod_cliente" INT NOT NULL,
+	"data" DATE NOT NULL,
+	PRIMARY KEY("cod"),
+	FOREIGN KEY("cod_cliente") REFERENCES "cliente"("cod")
+
+);
+CREATE TABLE PRODUTOS_VENDA(
+	"cod_venda" INT NOT NULL,
+	"cod_produto" INT NOT NULL,
+	"preco_venda" DECIMAL(11,2) NOT NULL,
+	"quantidade" INT NOT NULL CHECK("quantidade">0),
+	PRIMARY KEY("cod_venda","cod_produto"),
+	FOREIGN KEY("cod_venda") REFERENCES "venda"("cod"),
+	FOREIGN KEY("cod_produto") REFERENCES "produto"("cod")
+
+);
+CREATE VIEW view_estoque AS
+SELECT produto.cod AS CODIGO_PRODUTO, 
+                       produto.nome AS NOME_PRODUTO, 
+                       COALESCE(sumqtdc.qtd_comprado,0) AS QTD_COMPRADO, 
+                       COALESCE(sumqtdv.qtd_vendido,0) AS QTD_VENDIDO, 
+                       produto.qtd_estoque AS QTD_EM_ESTOQUE, 
+                       COALESCE(ultc.preco_compra,0) AS PRECO_COMPRA_ATUAL, 
+                       produto.preco_venda AS PRECO_VENDA_ATUAL, 
+                       COALESCE(CAST((((produto.preco_venda-ultc.preco_compra)*100)/ultc.preco_compra) AS NUMERIC(11,2)),0)||('%') AS LUCRO_PERCENTUAL_ATUAL 
+                       FROM produto 
+                       FULL JOIN (SELECT cod_produto,SUM(quantidade) AS qtd_comprado FROM produtos_compra GROUP BY (cod_produto)) AS sumqtdc ON sumqtdc.cod_produto=produto.cod 
+                       FULL JOIN (SELECT cod_produto,SUM(quantidade) AS qtd_vendido FROM produtos_venda GROUP BY (cod_produto)) AS sumqtdv ON sumqtdv.cod_produto=produto.cod 
+                       FULL JOIN (SELECT cod_produto, preco_compra FROM produtos_compra WHERE cod_compra IN (SELECT MAX(cod_compra) FROM produtos_compra GROUP BY(cod_produto))) AS ultc ON ultc.cod_produto=produto.cod  
+                       GROUP BY(produto.cod,ultc.preco_compra,sumqtdc.qtd_comprado,sumqtdv.qtd_vendido) 
+                       ORDER BY (QTD_EM_ESTOQUE) DESC;

@@ -1,0 +1,7 @@
+
+pip install image
+pip install psycopg2
+
+
+Usuário: 'mei'
+Senha: '123'

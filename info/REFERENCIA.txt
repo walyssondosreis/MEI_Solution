@@ -1,0 +1,21 @@
+﻿IMPLEMENTANDO INTEGRIDADE COM CONSTRAINTS
+https://imasters.com.br/artigo/247/sql-server/implementado-integridade-com-constraints/?trace=1519021197&source=single
+
+USO DOS PRINCIPAIS COMANDOS SQL
+https://becode.com.br/comandos-sql-nao-pode-viver-sem/
+https://www.w3schools.com/sql/sql_constraints.asp
+
+SQL CHECK CONSTRAINT
+https://www.tutorialspoint.com/sql/sql-check.htm
+
+SQL MOSTRAR 0 POR PADRÃO NA CONSULTA COM SUM (*OPERAÇÕES DE AGREGAÇÃO)
+https://stackoverflow.com/questions/1438884/how-to-get-sql-server-to-return-a-default-of-0-if-no-rows-exist
+
+SQL BUSCA DO ULTIMO VALOR DE COMPRA POR PRODUTO
+https://www.scriptbrasil.com.br/forum/topic/146190-resolvido%C2%A0retornar-apenas-o-%C3%BAltimo-registro-incluso/
+
+SQL DEFINIR TIPO E PRECISÃO DE DADO NA CONSULTA
+https://pt.stackoverflow.com/questions/3455/formatar-casas-decimais-diretamente-no-comando-sql-em-firebird
+
+SELECT AGRUPANDO POR MÊS 
+http://www.devmedia.com.br/forum/select-agrupando-por-mes-e-ano/457559
