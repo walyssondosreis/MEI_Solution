@@ -37,7 +37,7 @@ class App():
         #toplevel.maxsize(400,350) # METODO QUE DEFINE O TAMANHO MAX DA JANELA
         self.__topTk.minsize(int(self.widthDefaultTopLevel*0.78125),int(self.heightDefaultTopLevel*0.925925)) # METODO QUE DEFINE O TAMANHO MIN DA JANELA
         self.__topTk.title('MEI SOLUTION') # MET. QUE DEFINE O TITULO DA JANELA
-        self.__topTk.wm_attributes("-alpha",0.95) # regula o nivel de opacidade da janela 0 - 1
+        #self.__topTk.wm_attributes("-alpha",0.95) # regula o nivel de opacidade da janela 0 - 1
         try: self.__topTk.wm_iconbitmap("bussIcon.ico") # TROCA ICONE DA JANELA PADRÃO TK
         except: self.__topTk.wm_iconbitmap(r".\images\bussIcon.ico")  # TROCA ICONE DA JANELA PADRÃO TK
         self.__topTk['bg']=self.corFundo
