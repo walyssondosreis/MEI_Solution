@@ -1,5 +1,5 @@
 #TITLE: MEI SOLUTION
-
+# AUTOR: Walysson dos Reis
 # coding: utf-8
 
 from cadframe import *
